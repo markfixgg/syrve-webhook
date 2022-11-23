@@ -71,7 +71,7 @@ export interface IDeliveryCreatePayload {
                 flat?: string;
             }
             comment?: string;
-        }
+        } | null;
         comment?: string;
         customer: {
             name: string;
@@ -97,7 +97,7 @@ export interface IDeliveryItem {
         productId: string;
         name?: string;
         amount: number;
-        productGroupId: string;
+        productGroupId?: string;
     }[];
 }
 

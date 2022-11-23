@@ -62,8 +62,7 @@ export const prepareItems = (products: ITildaProduct[], isDelivery: boolean, amo
                     return array;
                 }, [])
 
-
-                // required modifiers
+                // Required mandatory "Group Modifiers"
                 desired.groupModifiers
                     .filter((x) => x.required)
                     .filter((x) => !deliveryItem.modifiers?.find((pred) => pred.productGroupId === x.id))
@@ -74,7 +73,18 @@ export const prepareItems = (products: ITildaProduct[], isDelivery: boolean, amo
                     }))
             }
 
-            if (!array.find((pred) => pred.productId === desired.id)) array.push(deliveryItem);
+            if (desired.modifiers.length && desired.modifiers.some((x) => x.required)) {
+                if (!deliveryItem.modifiers || !Array.isArray(deliveryItem.modifiers)) deliveryItem.modifiers = [];
+
+                desired.modifiers
+                    .filter((x) => x.required)
+                    .map((item) => deliveryItem.modifiers?.push({
+                        productId: item.id,
+                        amount: item.defaultAmount
+                    }))
+            }
+
+            array.push(deliveryItem);
         }
         return array;
     }, []);

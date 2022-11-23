@@ -94,7 +94,7 @@ async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
             flat: dapt
         },
         comment: `| NEW | ${deliveryvar} | NEW |\n${address}\nОплата: ${paymentType}`
-    } : {};
+    } : null;
 
     return {
         organizationId: config.SYRVE.organizationId,
