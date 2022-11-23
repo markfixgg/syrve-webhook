@@ -32,7 +32,7 @@ export const prepareItems = (products: ITildaProduct[], isDelivery: boolean, amo
             return group.parentGroup === config.SYRVE.menu_lang[language];
         })
 
-        if (desired) {
+        if (desired && !desired.isDeleted) {
             const deliveryItem: IDeliveryItem = {
                 productId: desired.id,
                 type: 'Product',
