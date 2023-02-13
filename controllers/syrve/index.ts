@@ -8,10 +8,15 @@ import config from "../../config";
 const webhook = async (req: Request, res: Response) => {
     console.log(JSON.stringify(req.body));
 
-    if(req.body.test) return res.status(200).send({ success: true });
-
     const phone = req.body["phone"] || req.body["one_click"];
+
     console.log(`Phone: ${phone}`)
+
+    if(req.body.test || !Object.keys(req.body).length) {
+        console.log('Initiate request');
+
+        return res.status(200).send({ success: true });
+    }
 
     if(!phone) {
         console.log(`Phone not found in body: `, phone)
